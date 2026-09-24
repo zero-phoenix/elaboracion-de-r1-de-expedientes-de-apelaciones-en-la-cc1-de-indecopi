@@ -16,7 +16,7 @@
 
 6. **Fojas** (no van en la R1; solo se informan): documentos del expediente en `entrada/expedientes/<NNNN-AAAA>/` y `python scripts/fojas.py <NNNN-AAAA>` → `_FOJAS.md` con la forma de las cédulas («Copia del escrito de apelación presentado por la parte denunciante el 12/06/2026 (8 fojas).»). Cuentan las hojas del escrito y sus anexos; no cuentan las páginas en blanco ni la constancia o cargo automático de Mesa de Partes. Cada exclusión se informa para que el usuario la confirme. Los documentos originales no se suben al repositorio.
 
-7. **Entrega por correo** (si el usuario lo pide): el Word APTO se envía adjunto desde la cuenta de Gmail conectada (conector Gmail de Claude: `send_message` con el .docx en base64) a la dirección del usuario, con asunto «R1 NNNN-AAAA/CC1-APELACIÓN». Sin conector, se entrega el archivo en el chat.
+7. **Entrega por correo** (si el usuario lo pide): el Word APTO se envía adjunto desde la cuenta de Gmail conectada (conector Gmail de Claude: `send_message` con el .docx en base64) a david.chavez.nge@gmail.com y david.chavez.nge@hotmail.com, con asunto «R1 NNNN-AAAA/CC1-APELACIÓN»; el conector exige el adjunto en base64 dentro de la llamada, así que el Word va como enlace de descarga del repositorio (privado). Sin conector, se entrega el archivo en el chat.
 
 ## 2. Reglas no negociables
 1. **Nada que no conste.** Un dato ausente no se deduce: la fila queda OBSERVADA. No se infiere señor/señora del nombre; no se inventa la vía de un proveedor.
