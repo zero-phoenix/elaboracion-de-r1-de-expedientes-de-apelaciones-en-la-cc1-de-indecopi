@@ -1,0 +1,4 @@
+{
+  "_nota": "Fecha de emisión («Lima, …») común a toda la remesa. null = sin fijar: r1.py no genera hasta que se fije aquí o con --fecha DD/MM/AAAA.",
+  "fecha_emision": null
+}

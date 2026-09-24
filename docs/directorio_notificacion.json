@@ -1,0 +1,420 @@
+{
+ "_nota": "Vía de notificación de cada proveedor, sacada SOLO de las R1 y cédulas del corpus (corpus/). La vía vigente es la de la evidencia más reciente. Si «mixta» es true, confirmar en cada caso con la cédula o el expediente (VIA_DDO en R1_DATOS). Proveedor ausente: la vía se consulta, no se inventa.",
+ "proveedores": {
+  "RIMAC": {
+   "razon_social": "Rímac Seguros y Reaseguros S.A.",
+   "via": "correo",
+   "mixta": false,
+   "evidencia": [
+    {
+     "expediente": "17-2026",
+     "fecha_r1": "2026-04-10",
+     "via": "correo"
+    },
+    {
+     "expediente": "98-2026",
+     "fecha_r1": "2026-04-17",
+     "via": "correo"
+    },
+    {
+     "expediente": "164-2026",
+     "fecha_r1": "2026-04-17",
+     "via": "correo"
+    },
+    {
+     "expediente": "80-2026",
+     "fecha_r1": "2026-04-17",
+     "via": "correo"
+    },
+    {
+     "expediente": "99-2026",
+     "fecha_r1": "2026-04-24",
+     "via": "correo"
+    },
+    {
+     "expediente": "20-2026",
+     "fecha_r1": "2026-04-30",
+     "via": "correo"
+    },
+    {
+     "expediente": "144-2026",
+     "fecha_r1": "2026-04-30",
+     "via": "correo"
+    },
+    {
+     "expediente": "154-2026",
+     "fecha_r1": "2026-04-30",
+     "via": "correo"
+    },
+    {
+     "expediente": "168-2026",
+     "fecha_r1": "2026-04-30",
+     "via": "correo"
+    },
+    {
+     "expediente": "206-2026",
+     "fecha_r1": "2026-05-21",
+     "via": "correo"
+    },
+    {
+     "expediente": "260-2026",
+     "fecha_r1": "2026-06-05",
+     "via": "correo"
+    },
+    {
+     "expediente": "287-2026",
+     "fecha_r1": "2026-06-26",
+     "via": "correo"
+    },
+    {
+     "expediente": "608-2026",
+     "fecha_r1": "2026-09-18",
+     "via": "correo"
+    }
+   ]
+  },
+  "QUALITAS": {
+   "razon_social": "Quálitas Compañía de Seguros S.A.",
+   "via": "correo",
+   "mixta": false,
+   "evidencia": [
+    {
+     "expediente": "742-2026",
+     "fecha_r1": "2026-09-04",
+     "via": "correo"
+    }
+   ]
+  },
+  "INTERSEGURO": {
+   "razon_social": "Interseguro Compañía de Seguros S.A.",
+   "via": "casilla",
+   "mixta": false,
+   "evidencia": [
+    {
+     "expediente": "19-2026",
+     "fecha_r1": "2026-04-10",
+     "via": "casilla"
+    },
+    {
+     "expediente": "972-2025",
+     "fecha_r1": "2026-04-10",
+     "via": "casilla"
+    },
+    {
+     "expediente": "165-2026",
+     "fecha_r1": "2026-04-30",
+     "via": "casilla"
+    },
+    {
+     "expediente": "351-2026",
+     "fecha_r1": "2026-06-05",
+     "via": "casilla"
+    },
+    {
+     "expediente": "353-2026",
+     "fecha_r1": "2026-06-05",
+     "via": "casilla"
+    },
+    {
+     "expediente": "354-2026",
+     "fecha_r1": "2026-06-05",
+     "via": "casilla"
+    },
+    {
+     "expediente": "446-2026",
+     "fecha_r1": "2026-06-18",
+     "via": "casilla"
+    },
+    {
+     "expediente": "625-2026",
+     "fecha_r1": "2026-09-04",
+     "via": "casilla"
+    },
+    {
+     "expediente": "726-2026",
+     "fecha_r1": "2026-09-04",
+     "via": "casilla"
+    }
+   ]
+  },
+  "PACIFICO": {
+   "razon_social": "Pacífico Compañía de Seguros y Reaseguros S.A.",
+   "via": "casilla",
+   "mixta": false,
+   "evidencia": [
+    {
+     "expediente": "129-2026",
+     "fecha_r1": "2026-04-24",
+     "via": "casilla"
+    },
+    {
+     "expediente": "347-2026",
+     "fecha_r1": "2026-06-05",
+     "via": "casilla"
+    }
+   ]
+  },
+  "CHUBB": {
+   "razon_social": "Chubb Perú S.A. Compañía de Seguros y Reaseguros",
+   "via": "casilla",
+   "mixta": false,
+   "evidencia": [
+    {
+     "expediente": "629-2026",
+     "fecha_r1": "2026-09-04",
+     "via": "casilla"
+    }
+   ]
+  },
+  "INSURAMA": {
+   "razon_social": "Insurama Servicios Perú S.A.C.",
+   "via": "casilla",
+   "mixta": false,
+   "evidencia": [
+    {
+     "expediente": "370-2026",
+     "fecha_r1": "2026-06-05",
+     "via": "casilla"
+    },
+    {
+     "expediente": "311-2026",
+     "fecha_r1": "2026-06-26",
+     "via": "casilla"
+    },
+    {
+     "expediente": "333-2026",
+     "fecha_r1": "2026-07-03",
+     "via": "casilla"
+    },
+    {
+     "expediente": "473-2026",
+     "fecha_r1": "2026-07-14",
+     "via": "casilla"
+    },
+    {
+     "expediente": "731-2026",
+     "fecha_r1": "2026-09-04",
+     "via": "casilla"
+    },
+    {
+     "expediente": "474-2026",
+     "fecha_r1": "2026-09-07",
+     "via": "casilla"
+    }
+   ]
+  },
+  "BNP PARIBAS CARDIF": {
+   "razon_social": "BNP Paribas Cardif S.A. Compañía de Seguros y Reaseguros",
+   "via": "casilla",
+   "mixta": false,
+   "evidencia": [
+    {
+     "expediente": "96-2026",
+     "fecha_r1": "2026-04-17",
+     "via": "casilla"
+    }
+   ]
+  },
+  "PROTECTA": {
+   "razon_social": "Protecta S.A. Compañía de Seguros y Reaseguros",
+   "via": "casilla",
+   "mixta": false,
+   "evidencia": [
+    {
+     "expediente": "57-2026",
+     "fecha_r1": "2026-04-10",
+     "via": "casilla"
+    }
+   ]
+  },
+  "LA POSITIVA SEGUROS Y REASEGUROS": {
+   "razon_social": "La Positiva Seguros y Reaseguros S.A.",
+   "via": "casilla",
+   "mixta": true,
+   "evidencia": [
+    {
+     "expediente": "370-2026",
+     "fecha_r1": "2026-06-05",
+     "via": "correo"
+    },
+    {
+     "expediente": "311-2026",
+     "fecha_r1": "2026-06-26",
+     "via": "casilla"
+    },
+    {
+     "expediente": "333-2026",
+     "fecha_r1": "2026-07-03",
+     "via": "casilla"
+    },
+    {
+     "expediente": "473-2026",
+     "fecha_r1": "2026-07-14",
+     "via": "correo"
+    },
+    {
+     "expediente": "663-2026",
+     "fecha_r1": "2026-09-04",
+     "via": "casilla"
+    },
+    {
+     "expediente": "685-2026",
+     "fecha_r1": "2026-09-04",
+     "via": "correo"
+    },
+    {
+     "expediente": "731-2026",
+     "fecha_r1": "2026-09-04",
+     "via": "correo"
+    },
+    {
+     "expediente": "450-2026",
+     "fecha_r1": "2026-09-07",
+     "via": "correo"
+    },
+    {
+     "expediente": "474-2026",
+     "fecha_r1": "2026-09-07",
+     "via": "casilla"
+    }
+   ]
+  },
+  "BANCO INTERAMERICANO DE FINANZAS": {
+   "razon_social": "Banco Interamericano de Finanzas S.A.",
+   "via": "domicilio",
+   "mixta": false,
+   "evidencia": [
+    {
+     "expediente": "629-2026",
+     "fecha_r1": "2026-09-04",
+     "via": "domicilio"
+    }
+   ]
+  },
+  "BANCO DE CREDITO DEL PERU": {
+   "razon_social": "Banco de Crédito del Perú S.A.",
+   "via": "correo",
+   "mixta": false,
+   "evidencia": [
+    {
+     "expediente": "100-2026",
+     "fecha_r1": "2026-04-28",
+     "via": "correo"
+    }
+   ]
+  },
+  "GAS NATURAL DE LIMA Y CALLAO": {
+   "razon_social": "Gas Natural de Lima y Callao S.A.",
+   "via": "casilla",
+   "mixta": false,
+   "evidencia": [
+    {
+     "expediente": "96-2026",
+     "fecha_r1": "2026-04-17",
+     "via": "casilla"
+    },
+    {
+     "expediente": "131-2026",
+     "fecha_r1": "2026-04-24",
+     "via": "casilla"
+    }
+   ]
+  },
+  "ASISTENCIA 365": {
+   "razon_social": "Asistencia 365 S.A.C. - 365 S.A.C.",
+   "via": "casilla",
+   "mixta": false,
+   "evidencia": [
+    {
+     "expediente": "154-2026",
+     "fecha_r1": "2026-04-30",
+     "via": "casilla"
+    }
+   ]
+  },
+  "UGAZ ASESORES Y CORREDORES DE SEGUROS": {
+   "razon_social": "Ugaz Asesores y Corredores de Seguros S.A.C.",
+   "via": "correo",
+   "mixta": false,
+   "evidencia": [
+    {
+     "expediente": "198-2026",
+     "fecha_r1": "2026-04-30",
+     "via": "correo"
+    }
+   ]
+  },
+  "ALFIN BANCO": {
+   "razon_social": "Alfin Banco S.A.",
+   "via": "correo",
+   "mixta": false,
+   "evidencia": [
+    {
+     "expediente": "480-2026",
+     "fuente": "texto de la R1 (sin cédula)",
+     "via": "correo"
+    }
+   ]
+  },
+  "INFINANCE XP": {
+   "razon_social": "InFinance XP S.A.",
+   "via": "casilla",
+   "mixta": false,
+   "evidencia": [
+    {
+     "expediente": "0398-2026",
+     "fuente": "texto de la R1 (sin cédula)",
+     "via": "casilla"
+    }
+   ]
+  },
+  "AFOCAT LIMA METROPOLITANA": {
+   "razon_social": "Asociación Fondo Contra Accidentes de Tránsito Lima Metropolitana Afocat Lima Metropolitana",
+   "via": "correo",
+   "mixta": false,
+   "evidencia": [
+    {
+     "expediente": "0460-2026",
+     "fuente": "texto de la R1 (sin cédula)",
+     "via": "correo"
+    }
+   ]
+  },
+  "AUTOSEGURO AFOCAT": {
+   "razon_social": "Autoseguro - Asociacion Fondo Contra Accidentes de Transito - Autoseguro – Afocat",
+   "via": "correo",
+   "mixta": false,
+   "evidencia": [
+    {
+     "expediente": "517-2026",
+     "fuente": "texto de la R1 (sin cédula)",
+     "via": "correo"
+    }
+   ]
+  },
+  "BANCO DE LA NACION": {
+   "razon_social": "Banco de la Nación",
+   "via": "correo",
+   "mixta": false,
+   "evidencia": [
+    {
+     "expediente": "R1 del corpus",
+     "fuente": "texto de la R1 (sin cédula)",
+     "via": "correo"
+    }
+   ]
+  },
+  "VISA INTERNATIONAL PERU": {
+   "razon_social": "Visa International Perú S.R.L.",
+   "via": null,
+   "mixta": false,
+   "evidencia": [
+    {
+     "expediente": "166-2026 (S5: no se notifica al denunciado)",
+     "fuente": "texto de la R1 (sin cédula)",
+     "via": null
+    }
+   ]
+  }
+ }
+}
