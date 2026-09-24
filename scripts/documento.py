@@ -146,7 +146,18 @@ def construir(caso, guion, plantilla, salida):
     tbl = body.find(W_TBL)
 
     def celda(p, txt):
-        poner_texto(p, f"**{txt}**" if _en_negrita(p) else txt, notas)
+        """Una línea por parte: varias partes van en párrafos sucesivos, nunca separadas con «/»."""
+        lineas = txt if isinstance(txt, list) else [txt]
+        neg = _en_negrita(p)
+        for extra in p.getparent().findall(W_P)[1:]:
+            p.getparent().remove(extra)
+        poner_texto(p, f"**{lineas[0]}**" if neg else lineas[0], notas)
+        ultimo = p
+        for ln in lineas[1:]:
+            nuevo = copy.deepcopy(p)
+            poner_texto(nuevo, f"**{ln}**" if neg else ln, notas)
+            ultimo.addnext(nuevo)
+            ultimo = nuevo
 
     for tr in tbl.iter(qn("w:tr")):
         celdas = tr.findall(qn("w:tc"))
@@ -160,10 +171,10 @@ def construir(caso, guion, plantilla, salida):
             celda(pv, caso.origen)
         elif etq.startswith("DENUNCIANTE"):
             celda(pe, "DENUNCIANTE" if len(caso.denunciantes) == 1 else "DENUNCIANTES")
-            celda(pv, " / ".join(p.nombre_cabecera for p in caso.denunciantes))
+            celda(pv, [p.nombre_cabecera for p in caso.denunciantes])
         elif etq.startswith("DENUNCIADO"):
             celda(pe, "DENUNCIADO(S)")
-            celda(pv, " / ".join(p.nombre_cabecera for p in caso.denunciados))
+            celda(pv, [p.nombre_cabecera for p in caso.denunciados])
         elif etq.startswith("RESOLUCION"):
             celda(pv, "1")
 
@@ -248,6 +259,9 @@ def verificar(ruta, caso=None):
     for otro in ("LUISA ANALI", "Ejecutivo", "Secretaria Técnica", "(e)"):
         if otro in todo:
             err.append(f"Aparece «{otro}»: firma o cargo que no corresponde.")
+    for tr in body.find(W_TBL).iter(qn("w:tr")):
+        if " / " in texto(tr):
+            err.append("El encabezado separa partes con «/»: cada parte va en su propia línea.")
     if "004-2019" in todo:
         err.append("Cita el Decreto Supremo 004-2019-JUS: debe ser 006-2026-JUS.")
     for i, t in enumerate(cuerpo):

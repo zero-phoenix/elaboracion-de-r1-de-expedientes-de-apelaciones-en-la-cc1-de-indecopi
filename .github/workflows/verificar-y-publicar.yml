@@ -1,0 +1,50 @@
+name: Verificar y publicar
+
+on:
+  push:
+    branches: [main]
+    tags: ["v*"]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  verificar:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Dependencias
+        run: pip install python-docx openpyxl lxml pymupdf
+      - name: Simulación popperiana sobre el corpus
+        run: |
+          python scripts/simular.py --salida simulacion.md
+          media=$(grep -oP 'Media de similitud: \*\*\K[0-9.]+' simulacion.md)
+          echo "Similitud media: $media"
+          if grep -q "NO APTO" simulacion.md; then echo "::error::Hay R1 NO APTAS en la simulación"; exit 1; fi
+          python -c "import sys; sys.exit(0 if float('$media') >= 0.98 else 1)" || { echo "::error::La similitud media bajó de 0,98"; exit 1; }
+      - name: Verificador sobre las pruebas versionadas
+        run: python scripts/r1.py verificar pruebas/*/R1*.docx
+      - uses: actions/upload-artifact@v4
+        with:
+          name: simulacion
+          path: simulacion.md
+
+  publicar:
+    needs: verificar
+    if: startsWith(github.ref, 'refs/tags/v')
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Notas de la versión
+        run: |
+          v="${GITHUB_REF_NAME}"
+          awk -v v="## ${v}" '$0 ~ "^"v {p=1; print; next} /^## v/ {p=0} p' CHANGELOG.md > notas.md
+          cat notas.md
+      - uses: softprops/action-gh-release@v2
+        with:
+          name: ${{ github.ref_name }}
+          body_path: notas.md

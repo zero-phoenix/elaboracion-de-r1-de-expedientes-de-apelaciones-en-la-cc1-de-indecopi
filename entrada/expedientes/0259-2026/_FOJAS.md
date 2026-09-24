@@ -10,6 +10,10 @@ No van en la R1. Se cuentan las hojas del escrito y sus anexos; no se cuentan p�
 | c7840831-20255063610038520600056352292025506361.pdf | 14 | **14** | — | escrito de apelación | 11/12/2025 | 10/03/2025 |
 | e5edd02b-doc_202603171152305836.pdf | 6 | no se traslada | — | resolución de Indecopi | — | 10/03/2025 |
 
+## Vías que constan en el expediente (mandan sobre el directorio)
+
+- «033401f4-doc_202603171148256638.pdf» es escaneado: **leerlo a la vista** en `_hojas/` (033401f4-doc_202603171148256638_p1.png). Si es una cédula física (dirección + CARGO/RECIBIDO), esa parte se notifica por **domicilio**.
+
 ## Para tu control (forma de las cédulas)
 
 - Copia del escrito de apelación presentado por [parte] el 11/12/2025 (14 fojas).

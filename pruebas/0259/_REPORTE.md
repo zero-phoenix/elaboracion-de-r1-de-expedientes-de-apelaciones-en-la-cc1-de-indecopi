@@ -1,6 +1,6 @@
 # Reporte de R1 de apelaciones
 
-Fecha de emisión: 24/09/2026
+Fecha de emisión: SIN FIJAR (config/remesa.json o --fecha)
 
 | Expediente | Supuesto | Estado | Detalle |
 |---|---|---|---|

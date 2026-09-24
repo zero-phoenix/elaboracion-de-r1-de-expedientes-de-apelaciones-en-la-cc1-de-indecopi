@@ -23,3 +23,8 @@ Cada entrada: **hipótesis** que se tenía → **contraejemplo** hallado en el c
 | 17 | S1 no admite escritos. | 480, 517, 726 y 731 trasladan en S1 el recurso y un escrito del propio apelante. | S1 admite escritos del apelante; si la otra parte presentó escritos, S2. |
 | 18 | 0100 notifica a todas las partes. | 0100 traslada al BCP pero no le requiere acuse. | El sistema notifica siempre a todas las partes trasladadas. |
 | 19 | LibreOffice sirve para las capturas. | En este entorno no carga ni un .txt. | Visor propio (`scripts/vista.py`): mide el XML y fotografía con Chromium. |
+| 20 | Las partes del encabezado se separan con «/». | Indicación del usuario (0259-2026). | Una línea por parte dentro de la celda; el verificador rechaza «/» en el encabezado. |
+| 21 | La vía del proveedor es siempre la del directorio. | 0259-2026: Quálitas (correo en el directorio) tiene en el expediente una cédula física con cargo. | Las cédulas del expediente mandan; cédula física = domicilio. |
+| 22 | La fecha de emisión es única por remesa. | 0259-2026 lleva fecha propia (18/09/2026). | Columna FECHA_EMISION por expediente. |
+| 23 | Todo PDF del expediente es un escrito que se traslada. | 0259: llegan la RF, cédulas, constancia de notificación y documento de elevación. | `fojas.py` distingue escritos de parte (se cuentan) de documentos de Indecopi (no se trasladan). |
+| 24 | La fecha del escrito es la que el texto dice. | El recurso del 0259 termina «Tarapoto, 11 de diciembre de 2025»; la RF citada en él es del 14/11/2025. | Fecha de presentación = firma del agente automatizado de Mesa de Partes (o cargo). |

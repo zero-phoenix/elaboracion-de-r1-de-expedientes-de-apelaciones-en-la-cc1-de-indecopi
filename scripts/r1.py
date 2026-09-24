@@ -26,6 +26,7 @@ from redaccion import GUION, PLANTILLA  # noqa: E402
 COLUMNAS = [
     ("EXPEDIENTE", "número de ingreso NNNN-AAAA"),
     ("SUPUESTO", "S1…S5 (vacío = se deduce)"),
+    ("FECHA_EMISION", "DD/MM/AAAA solo si este expediente lleva fecha propia (vacío = la de la remesa)"),
     ("FECHA_INGRESO_CC1", "DD/MM/AAAA: fecha en que la CC1 recibió el expediente"),
     ("EXPEDIENTE_ORIGEN", "vacío = el del Excel de control"),
     ("DENUNCIANTE_NOMBRE", "Como va en el texto, con tildes (varios: /)"),
@@ -199,8 +200,9 @@ def cmd_leer(a, generados=None):
 
 def cmd_generar(a):
     cs, fe = casos(a)
-    if fe is None:
-        sys.exit("Fecha de emisión sin fijar: config/remesa.json o --fecha DD/MM/AAAA.")
+    for c in cs:
+        if c.fecha_emision is None:
+            c.observaciones.append("Fecha de emisión sin fijar (FECHA_EMISION, config/remesa.json o --fecha).")
     out = Path(a.salida)
     out.mkdir(exist_ok=True)
     res = {}

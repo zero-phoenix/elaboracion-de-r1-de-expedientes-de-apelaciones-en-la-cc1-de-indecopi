@@ -200,6 +200,8 @@ def construir(exp, fila, extra, fecha_emision):
     ob, adv = c.observaciones, c.advertencias
     X = lambda k: extra.get(k)  # noqa: E731
 
+    if X("FECHA_EMISION"):
+        c.fecha_emision = fecha(X("FECHA_EMISION"))
     c.origen = limpio(X("EXPEDIENTE_ORIGEN") or (fila or {}).get("EXP ORIGEN"))
     if not re.fullmatch(r"\d{1,5}-\d{4}/PS\d", c.origen or ""):
         ob.append(f"Expediente de origen ausente o mal escrito: «{c.origen}».")

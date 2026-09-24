@@ -115,6 +115,30 @@ def analizar(ruta):
             "aviso": aviso, "sin_texto": sin_texto}
 
 
+def via_cedula(ruta):
+    """Destinatario y vía de una cédula con texto: CORREO-E / CASILLA-E / dirección física (domicilio)."""
+    import pymupdf
+    t = pymupdf.open(str(ruta))[0].get_text()
+    m = re.search(r"Señor(?:\(es\)|a)?\s*\n\s*(.+?)\n\s*(.+?)\n", t)
+    if not m:
+        return None
+    dest = m.group(2).upper()
+    via = "casilla" if dest.startswith("CASILLA") else "correo" if dest.startswith("CORREO") else "domicilio"
+    return m.group(1).strip(), via
+
+
+def hojas_para_leer(ruta, carpeta):
+    """PNG de cada página de un PDF escaneado, para leerlo a la vista."""
+    import pymupdf
+    out = []
+    (carpeta / "_hojas").mkdir(exist_ok=True)
+    for i, p in enumerate(pymupdf.open(str(ruta)), 1):
+        dst = carpeta / "_hojas" / f"{ruta.stem}_p{i}.png"
+        p.get_pixmap(dpi=90).save(str(dst))
+        out.append(dst.name)
+    return out
+
+
 def frase(r, quien="[parte]", fecha=None):
     n = r["fojas"]
     return (f"Copia del {r['tipo']} presentado por {quien} el {fecha or r['presentacion'] or '[fecha]'} "
@@ -135,7 +159,7 @@ def main():
          "ni la constancia/cargo automático de Mesa de Partes. Revisa las exclusiones.", "",
          "| Documento | Páginas | Fojas | Excluidas | Tipo | Presentación (firma Mesa de Partes) | Última fecha en el texto |",
          "|---|---|---|---|---|---|---|"]
-    frases = []
+    frases, vias = [], []
     for f in sorted(carpeta.iterdir()):
         if f.name.startswith("_") or f.is_dir():
             continue
@@ -149,6 +173,15 @@ def main():
             L.append(f"| ↳ aviso | | | {r['aviso'] or 'PDF escaneado sin texto: tipo y fecha a confirmar.'} | | | |")
         if r["escrito"]:
             frases.append(frase(r))
+        if f.suffix.lower() == ".pdf" and "cédula" in r["tipo"]:
+            v = via_cedula(f)
+            if v:
+                vias.append(f"- {v[0]} → **{v[1]}** (según «{f.name}»)")
+        if f.suffix.lower() == ".pdf" and r["sin_texto"]:
+            png = hojas_para_leer(f, carpeta)
+            vias.append(f"- «{f.name}» es escaneado: **leerlo a la vista** en `_hojas/` ({', '.join(png)}). "
+                        "Si es una cédula física (dirección + CARGO/RECIBIDO), esa parte se notifica por **domicilio**.")
+    L += ["", "## Vías que constan en el expediente (mandan sobre el directorio)", ""] + (vias or ["- Ninguna cédula en los documentos: se usa el directorio."])
     L += ["", "## Para tu control (forma de las cédulas)", ""] + [f"- {x}" for x in frases]
     L += ["", "La fecha de un escrito de parte es la de su presentación (firma del agente automatizado de Mesa de Partes o cargo), "
           "no la que el escrito dice. Los documentos emitidos por Indecopi no se trasladan ni se cuentan."]

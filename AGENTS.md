@@ -1,4 +1,4 @@
-# AGENTS.md — R1 de expedientes de apelación · CC1 Indecopi (v1.0)
+# AGENTS.md — R1 de expedientes de apelación · CC1 Indecopi (v1.1)
 
 Única fuente de reglas vigentes de este repositorio. Solo se elabora la **Resolución 1 (R1)** que da trámite a la apelación elevada a la Comisión de Protección al Consumidor N° 1: **traslado del recurso o recursos**, requerimientos de notificación y, cuando corresponde, agregado de escritos o citación a audiencia. **No se elaboran cédulas** (las del corpus son solo referencia de vías).
 
@@ -23,6 +23,9 @@
 4. **Firma única:** LOUSSIANA CATHERINE SALAZAR QUIROZ, «Especialista Legal», «Comisión de Protección al Consumidor N° 1», iniciales LSQ/DCQ (`config/firma.json`), **también cuando el denunciado es Rímac**.
 5. **TUO de la LPAG:** Decreto Supremo N° 006-2026-JUS. Nunca 004-2019-JUS.
 6. **Erratas de las R1 previas no se copian** (ver `docs/refutaciones.md`).
+7. **Los documentos del expediente mandan** sobre el Excel, el directorio y las R1 previas: fecha de presentación (firma del agente automatizado de Mesa de Partes), resolución apelada, tratamiento («el señor García», «la señora Alvarado» en la RF), vías.
+8. **Encabezado:** con dos o más denunciantes o denunciados, **cada uno en su propia línea** dentro de la celda; nunca separados con «/». Rótulo «DENUNCIANTES» si son varios; «DENUNCIADO(S)» siempre (como el corpus).
+9. **Fecha de emisión por expediente:** la columna FECHA_EMISION de R1_DATOS, si se llena, manda sobre la de la remesa.
 
 ## 3. Los cinco supuestos
 | | Supuesto | Plantilla | Cuándo |
@@ -43,6 +46,7 @@ El supuesto se deduce de los datos o se fija en la columna SUPUESTO.
 - Singular/plural concuerdan con el número de destinatarios («reciba/reciban», «efectúe/efectúen», «notificarle/notificarles», «haga/hagan»).
 - **Vía de cada proveedor:** `docs/directorio_notificacion.json`, sacado solo de las R1 y cédulas del corpus. **La Positiva** es **mixta** (correo y casilla en fechas cercanas): se indica en cada caso. Proveedor ausente del directorio: se pregunta.
 - Denunciante: correo salvo que la cédula diga CASILLA-E o domicilio (DENUNCIANTE_VIA).
+- **Cédula física en el expediente = vía domicilio para esa parte**, aunque el directorio diga otra cosa (caso 0259-2026: Quálitas, cédula física con CARGO en San Isidro → «requerir … en su domicilio procesal, señale un correo electrónico…»). `fojas.py` lista las cédulas del expediente y convierte en imágenes (`_hojas/`) los PDF escaneados para leerlos a la vista; **todo PDF escaneado se mira** antes de fijar vías.
 
 ## 5. Forma (medida en los modelos)
 A4; márgenes 2,25 cm arriba, 3,5 cm abajo y 3,0 cm a los lados; Arial Narrow 11 justificado, interlineado sencillo, espaciado 0/0; tabla de encabezado INGRESO EN COMISIÓN / EXPEDIENTE DE ORIGEN Nº / DENUNCIANTE / DENUNCIADO(S) / RESOLUCIÓN Nº; «Lima, D de mes de AAAA» (mes en minúscula, «setiembre»); firma centrada en cuatro líneas; iniciales en 8 pt; notas al pie en 8 pt. Sin resaltados. El verificador (`documento.verificar`) y el visor (`scripts/vista.py`) lo comprueban.
