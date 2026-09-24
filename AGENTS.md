@@ -14,6 +14,8 @@
 4. `python scripts/r1.py generar --exps … [--fecha DD/MM/AAAA]` — `salida/R1 NNNN-AAAA-CC1-APE.docx`, verificación automática y `salida/_vista/` (captura lado a lado con la plantilla + ficha de formato).
 5. Revisar **todas** las capturas de `_vista/` antes de entregar. Solo se entrega lo que dice **GENERADO · APTO**.
 
+6. **Fojas** (no van en la R1; solo se informan): documentos del expediente en `entrada/expedientes/<NNNN-AAAA>/` y `python scripts/fojas.py <NNNN-AAAA>` → `_FOJAS.md` con la forma de las cédulas («Copia del escrito de apelación presentado por la parte denunciante el 12/06/2026 (8 fojas).»). Cuentan las hojas del escrito y sus anexos; no cuentan las páginas en blanco ni la constancia o cargo automático de Mesa de Partes. Cada exclusión se informa para que el usuario la confirme. Los documentos originales no se suben al repositorio.
+
 ## 2. Reglas no negociables
 1. **Nada que no conste.** Un dato ausente no se deduce: la fila queda OBSERVADA. No se infiere señor/señora del nombre; no se inventa la vía de un proveedor.
 2. **Solo R1.** Nunca cédulas, oficios ni otros actos.

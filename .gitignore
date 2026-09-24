@@ -3,3 +3,5 @@ __pycache__/
 salida/
 ~$*
 .~lock*
+entrada/expedientes/*/*
+!entrada/expedientes/*/_FOJAS.md
