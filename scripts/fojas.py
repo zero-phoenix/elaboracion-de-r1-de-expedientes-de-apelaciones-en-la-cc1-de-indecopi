@@ -26,6 +26,12 @@ from modelo import RAIZ, fechas_en  # noqa: E402
 
 CARGO = re.compile(r"mesa de partes|cargo de (presentaci|recepci)|constancia de (presentaci|recepci)|"
                    r"hoja de (tr[aá]mite|ruta)|n[uú]mero de (tr[aá]mite|registro)|fecha y hora de (presentaci|recepci)", re.I)
+INDECOPI = [  # documentos emitidos por Indecopi: no son escritos de parte, no se trasladan ni se cuentan
+    (re.compile(r"C[ÉE]DULA DE NOTIFICACI", re.I), "cédula de notificación"),
+    (re.compile(r"NOTIFICACI[ÓO]N A CORREO ELECTR", re.I), "constancia de notificación electrónica"),
+    (re.compile(r"DOCUMENTO DE ELEVACI|HOJA DE (ELEVACI|TRASLADO)|MEMOR[AÁ]NDUM", re.I), "documento de elevación/traslado"),
+    (re.compile(r"^\s*(?:.*\n){0,12}.*RESOLUCI[ÓO]N (FINAL )?N[º°o]", re.I), "resolución de Indecopi"),
+]
 APELACION = re.compile(r"recurso de apelaci|interpongo.{0,40}apelaci|interpone.{0,40}apelaci|apelaci[oó]n contra", re.I)
 
 
@@ -56,6 +62,20 @@ def paginas_docx(ruta):
     return [{"n": i + 1, "texto": txt if i == 0 else "", "tinta": 1} for i in range(app or 1)], app is None
 
 
+def firmas(ruta):
+    """[(firmante, motivo, fecha)] leídos del PDF (firma digital)."""
+    b = ruta.read_bytes()
+    out = []
+    for m in re.finditer(rb"/M\s*\(D:(\d{14})", b):
+        trozo = b[max(0, m.start() - 1500):m.start() + 1500]
+        nom = re.search(rb"/Name\s*\(([^)]{0,120})\)", trozo)
+        mot = re.search(rb"/Reason\s*\(([^)]{0,120})\)", trozo)
+        d = m.group(1).decode()
+        out.append(((nom.group(1).decode("latin-1") if nom else ""), (mot.group(1).decode("latin-1") if mot else ""),
+                    f"{d[6:8]}/{d[4:6]}/{d[0:4]}"))
+    return out
+
+
 def analizar(ruta):
     ext = ruta.suffix.lower()
     aviso = ""
@@ -78,16 +98,26 @@ def analizar(ruta):
         else:
             cuenta.append(p["n"])
     todo = "\n".join(p["texto"] for p in pags[:3])
-    tipo = "escrito de apelación" if APELACION.search(todo) else "escrito"
+    fir = firmas(ruta) if ext == ".pdf" else []
+    mpv = [f for f in fir if "Agente Automatizado" in f[0]]
+    sello = re.compile(r"Firmado digitalmente por.*?(Fecha:[^\n]*|$)", re.S)
+    sin_texto = all(len(sello.sub("", p["texto"]).strip()) < 15 for p in pags)
+    tipo = next((t for rx, t in INDECOPI if rx.search(pags[0]["texto"][:1500])), None)
+    if tipo is None and sin_texto and (any("fedatario" in f[1].lower() for f in fir) or "fedatario" in todo.lower()):
+        tipo = "documento escaneado autenticado por fedatario (revisar)"
+    es_escrito = tipo is None
+    if es_escrito:
+        tipo = "escrito de apelación" if APELACION.search(todo) else "escrito"
     fechas = fechas_en(todo)
-    return {"archivo": ruta.name, "paginas": len(pags), "fojas": len(cuenta), "excluidas": excluidas,
-            "tipo": tipo, "fecha_texto": fechas[0].strftime("%d/%m/%Y") if fechas else "", "aviso": aviso,
-            "sin_texto": all(len(p["texto"]) < 15 for p in pags)}
+    return {"archivo": ruta.name, "paginas": len(pags), "fojas": len(cuenta) if es_escrito else 0,
+            "excluidas": excluidas if es_escrito else [], "tipo": tipo, "escrito": es_escrito,
+            "presentacion": mpv[0][2] if mpv else "", "fecha_texto": fechas[-1].strftime("%d/%m/%Y") if fechas else "",
+            "aviso": aviso, "sin_texto": sin_texto}
 
 
 def frase(r, quien="[parte]", fecha=None):
     n = r["fojas"]
-    return (f"Copia del {r['tipo']} presentado por {quien} el {fecha or r['fecha_texto'] or '[fecha]'} "
+    return (f"Copia del {r['tipo']} presentado por {quien} el {fecha or r['presentacion'] or '[fecha]'} "
             f"({n} {'foja' if n == 1 else 'fojas'}).")
 
 
@@ -103,7 +133,8 @@ def main():
     L = [f"# Fojas — {exp}/CC1-APELACIÓN", "",
          "No van en la R1. Se cuentan las hojas del escrito y sus anexos; no se cuentan páginas en blanco "
          "ni la constancia/cargo automático de Mesa de Partes. Revisa las exclusiones.", "",
-         "| Documento | Páginas del archivo | Fojas | Excluidas | Tipo detectado | Fecha en el texto |", "|---|---|---|---|---|---|"]
+         "| Documento | Páginas | Fojas | Excluidas | Tipo | Presentación (firma Mesa de Partes) | Última fecha en el texto |",
+         "|---|---|---|---|---|---|---|"]
     frases = []
     for f in sorted(carpeta.iterdir()):
         if f.name.startswith("_") or f.is_dir():
@@ -112,13 +143,15 @@ def main():
         if r is None:
             continue
         exc = "; ".join(f"p. {n}: {m}" for n, m in r["excluidas"]) or "—"
-        L.append(f"| {r['archivo']} | {r['paginas']} | **{r['fojas']}** | {exc} | {r['tipo']} | {r['fecha_texto'] or '—'} |")
-        if r["aviso"] or r["sin_texto"]:
-            L.append(f"| ↳ aviso | | | {r['aviso'] or 'PDF escaneado sin texto: la detección de blancos es por tinta; tipo y fecha a confirmar.'} | | |")
-        frases.append(frase(r))
+        fo = f"**{r['fojas']}**" if r["escrito"] else "no se traslada"
+        L.append(f"| {r['archivo']} | {r['paginas']} | {fo} | {exc} | {r['tipo']} | {r['presentacion'] or '—'} | {r['fecha_texto'] or '—'} |")
+        if r["escrito"] and (r["aviso"] or r["sin_texto"]):
+            L.append(f"| ↳ aviso | | | {r['aviso'] or 'PDF escaneado sin texto: tipo y fecha a confirmar.'} | | | |")
+        if r["escrito"]:
+            frases.append(frase(r))
     L += ["", "## Para tu control (forma de las cédulas)", ""] + [f"- {x}" for x in frases]
-    L += ["", "La fecha de un escrito de parte es la de su presentación (firma digital / cargo), no la que el escrito dice; "
-          "«[parte]» y la fecha se completan al confirmar quién lo presentó."]
+    L += ["", "La fecha de un escrito de parte es la de su presentación (firma del agente automatizado de Mesa de Partes o cargo), "
+          "no la que el escrito dice. Los documentos emitidos por Indecopi no se trasladan ni se cuentan."]
     out = carpeta / "_FOJAS.md"
     out.write_text("\n".join(L) + "\n", encoding="utf-8")
     print("\n".join(L))
