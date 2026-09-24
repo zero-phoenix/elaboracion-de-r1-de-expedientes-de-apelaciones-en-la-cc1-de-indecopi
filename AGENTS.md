@@ -1,4 +1,4 @@
-# AGENTS.md — R1 de expedientes de apelación · CC1 Indecopi (v1.1)
+# AGENTS.md — R1 de expedientes de apelación · CC1 Indecopi (v1.2)
 
 Única fuente de reglas vigentes de este repositorio. Solo se elabora la **Resolución 1 (R1)** que da trámite a la apelación elevada a la Comisión de Protección al Consumidor N° 1: **traslado del recurso o recursos**, requerimientos de notificación y, cuando corresponde, agregado de escritos o citación a audiencia. **No se elaboran cédulas** (las del corpus son solo referencia de vías).
 
@@ -16,6 +16,8 @@
 
 6. **Fojas** (no van en la R1; solo se informan): documentos del expediente en `entrada/expedientes/<NNNN-AAAA>/` y `python scripts/fojas.py <NNNN-AAAA>` → `_FOJAS.md` con la forma de las cédulas («Copia del escrito de apelación presentado por la parte denunciante el 12/06/2026 (8 fojas).»). Cuentan las hojas del escrito y sus anexos; no cuentan las páginas en blanco ni la constancia o cargo automático de Mesa de Partes. Cada exclusión se informa para que el usuario la confirme. Los documentos originales no se suben al repositorio.
 
+7. **Entrega por correo** (si el usuario lo pide): el Word APTO se envía adjunto desde la cuenta de Gmail conectada (conector Gmail de Claude: `send_message` con el .docx en base64) a la dirección del usuario, con asunto «R1 NNNN-AAAA/CC1-APELACIÓN». Sin conector, se entrega el archivo en el chat.
+
 ## 2. Reglas no negociables
 1. **Nada que no conste.** Un dato ausente no se deduce: la fila queda OBSERVADA. No se infiere señor/señora del nombre; no se inventa la vía de un proveedor.
 2. **Solo R1.** Nunca cédulas, oficios ni otros actos.
@@ -24,7 +26,7 @@
 5. **TUO de la LPAG:** Decreto Supremo N° 006-2026-JUS. Nunca 004-2019-JUS.
 6. **Erratas de las R1 previas no se copian** (ver `docs/refutaciones.md`).
 7. **Los documentos del expediente mandan** sobre el Excel, el directorio y las R1 previas: fecha de presentación (firma del agente automatizado de Mesa de Partes), resolución apelada, tratamiento («el señor García», «la señora Alvarado» en la RF), vías.
-8. **Encabezado:** con dos o más denunciantes o denunciados, **cada uno en su propia línea** dentro de la celda; nunca separados con «/». Rótulo «DENUNCIANTES» si son varios; «DENUNCIADO(S)» siempre (como el corpus).
+8. **Encabezado:** con dos o más denunciantes o denunciados, **cada uno en su propia línea** dentro de la celda; nunca separados con «/». Rótulo «DENUNCIANTE» con uno y «DENUNCIANTE(S)» **solo** con dos o más; «DENUNCIADO(S)» siempre (como el corpus).
 9. **Fecha de emisión por expediente:** la columna FECHA_EMISION de R1_DATOS, si se llena, manda sobre la de la remesa.
 
 ## 3. Los cinco supuestos

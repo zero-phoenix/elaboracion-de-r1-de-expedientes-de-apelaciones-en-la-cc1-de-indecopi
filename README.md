@@ -2,9 +2,11 @@
 
 Genera en Word la **Resolución 1** de los expedientes de apelación que recibe la Comisión de Protección al Consumidor N° 1: traslado del recurso o recursos, requerimientos de notificación y, según el caso, agregado de escritos o citación a audiencia. Parte de un Excel de control y de cinco plantillas extraídas de las R1 ya revisadas. No elabora cédulas.
 
-> **Última actualización — v1.1.0 (24/09/2026):** primera R1 del paquete 1 (0259-2026) elaborada desde los documentos del expediente; partes del encabezado una por línea; fecha de emisión por expediente; la cédula física del expediente fija la vía «domicilio»; `fojas.py` separa escritos de parte de documentos de Indecopi y lee la fecha de presentación de la firma de Mesa de Partes; verificación automática y Releases en GitHub Actions. Detalle en [CHANGELOG.md](CHANGELOG.md).
+> **Última actualización — v1.2.0 (24/09/2026):** rótulo «DENUNCIANTE(S)» solo con dos o más denunciantes; R1 del 0259-2026 cerrada; el sistema completo se descarga como `.zip` desde [Releases](../../releases/latest). Novedades anteriores (v1.1.0): partes una por línea, fecha por expediente, cédula física = domicilio, `fojas.py` con fecha de presentación y vías del expediente, verificación en GitHub Actions. Detalle en [CHANGELOG.md](CHANGELOG.md).
 
 Reglas vigentes: **[AGENTS.md](AGENTS.md)**. Cómo empezar en otra computadora: **[ARRANQUE.md](ARRANQUE.md)**.
+
+**Descarga:** el último `sistema-r1-apelaciones-vX.Y.Z.zip` está en [Releases](../../releases/latest).
 
 ```bash
 pip install -r requirements.txt

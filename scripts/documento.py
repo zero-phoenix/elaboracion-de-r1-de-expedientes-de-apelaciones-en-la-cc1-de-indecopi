@@ -170,7 +170,7 @@ def construir(caso, guion, plantilla, salida):
         elif etq.startswith("EXPEDIENTE DE ORIGEN"):
             celda(pv, caso.origen)
         elif etq.startswith("DENUNCIANTE"):
-            celda(pe, "DENUNCIANTE" if len(caso.denunciantes) == 1 else "DENUNCIANTES")
+            celda(pe, "DENUNCIANTE" if len(caso.denunciantes) == 1 else "DENUNCIANTE(S)")
             celda(pv, [p.nombre_cabecera for p in caso.denunciantes])
         elif etq.startswith("DENUNCIADO"):
             celda(pe, "DENUNCIADO(S)")

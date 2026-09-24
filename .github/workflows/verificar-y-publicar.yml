@@ -50,9 +50,16 @@ jobs:
           awk -v v="## ${v}" 'index($0, v)==1 {p=1; print; next} /^## v/ {p=0} p' CHANGELOG.md > notas.md
           if git rev-parse -q --verify "refs/tags/$v" >/dev/null; then echo "existe=si" >> "$GITHUB_OUTPUT"; else echo "existe=no" >> "$GITHUB_OUTPUT"; fi
           cat notas.md
+      - name: Paquete descargable del sistema
+        run: |
+          v=${{ steps.v.outputs.version }}
+          git archive --format=zip --prefix="sistema-r1-apelaciones-$v/" -o "sistema-r1-apelaciones-$v.zip" HEAD \
+            ':(exclude)entrada/expedientes' ':(exclude)pruebas' ':(exclude)salida'
+          ls -la *.zip
       - uses: softprops/action-gh-release@v2
         if: steps.v.outputs.existe == 'no' || startsWith(github.ref, 'refs/tags/v')
         with:
+          files: sistema-r1-apelaciones-${{ steps.v.outputs.version }}.zip
           tag_name: ${{ steps.v.outputs.version }}
           target_commitish: ${{ github.sha }}
           name: ${{ steps.v.outputs.version }}

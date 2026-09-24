@@ -28,3 +28,4 @@ Cada entrada: **hipótesis** que se tenía → **contraejemplo** hallado en el c
 | 22 | La fecha de emisión es única por remesa. | 0259-2026 lleva fecha propia (18/09/2026). | Columna FECHA_EMISION por expediente. |
 | 23 | Todo PDF del expediente es un escrito que se traslada. | 0259: llegan la RF, cédulas, constancia de notificación y documento de elevación. | `fojas.py` distingue escritos de parte (se cuentan) de documentos de Indecopi (no se trasladan). |
 | 24 | La fecha del escrito es la que el texto dice. | El recurso del 0259 termina «Tarapoto, 11 de diciembre de 2025»; la RF citada en él es del 14/11/2025. | Fecha de presentación = firma del agente automatizado de Mesa de Partes (o cargo). |
+| 25 | Con varios denunciantes el rótulo es «DENUNCIANTES». | Indicación del usuario (0259-2026). | «DENUNCIANTE(S)» solo con dos o más; con uno, «DENUNCIANTE». |

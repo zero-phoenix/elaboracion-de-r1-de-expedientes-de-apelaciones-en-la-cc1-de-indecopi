@@ -1,5 +1,11 @@
 # Cambios
 
+## v1.2.0 — 24/09/2026
+- Encabezado: rótulo **«DENUNCIANTE(S)» solo cuando hay dos o más denunciantes** (con uno, «DENUNCIANTE»).
+- R1 del **0259-2026** cerrada (fecha 18/09/2026; Quálitas por domicilio; denunciantes en líneas separadas).
+- **Descargable del sistema en Releases**: `sistema-r1-apelaciones-<versión>.zip` (scripts, plantillas, configuración, documentación, directorio y corpus; sin documentos de expedientes ni Word generados).
+- Envío por correo del Word generado (instrucciones en AGENTS.md).
+
 ## v1.1.0 — 24/09/2026
 - **Expediente 0259-2026** elaborado con sus documentos (primera R1 del paquete 1).
 - Encabezado: varias partes, **una por línea** (nunca «/»); el verificador lo exige.

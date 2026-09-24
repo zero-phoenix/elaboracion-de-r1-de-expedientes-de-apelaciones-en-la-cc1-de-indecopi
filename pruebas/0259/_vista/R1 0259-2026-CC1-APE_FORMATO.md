@@ -10,7 +10,7 @@ Página 21.00 × 29.70 cm · márgenes sup 2.25 / inf 3.50 / izq 3.00 / der 3.00
 | 4 | EXPEDIENTE DE ORIGEN Nº | izquierda | izq 0.00 cm · 1.ª línea +0.00 cm | 1.00 líneas | 0/0 pt |  | «EXPEDIENTE DE ORIGEN Nº» → Arial Narrow 11.0 negrita |
 | 5 | : | izquierda | izq 0.00 cm · 1.ª línea +0.00 cm | 1.00 líneas | 0/0 pt |  | «:» → Arial Narrow 11.0 negrita |
 | 6 | 901-2025/PS1 | izquierda | izq 0.00 cm · 1.ª línea +0.00 cm | 1.00 líneas | 0/0 pt |  | «901-2025/PS1» → Arial Narrow 11.0 negrita |
-| 7 | DENUNCIANTES | izquierda | izq 0.00 cm · 1.ª línea +0.00 cm | 1.00 líneas | 0/0 pt |  | «DENUNCIANTES» → Arial Narrow 11.0 negrita |
+| 7 | DENUNCIANTE(S) | izquierda | izq 0.00 cm · 1.ª línea +0.00 cm | 1.00 líneas | 0/0 pt |  | «DENUNCIANTE(S)» → Arial Narrow 11.0 negrita |
 | 8 | : | izquierda | izq 0.00 cm · 1.ª línea +0.00 cm | 1.00 líneas | 0/0 pt |  | «:» → Arial Narrow 11.0 negrita |
 | 9 | CHRISTIAN ERICK GARCÍA CHÁVEZ | izquierda | izq 0.00 cm · 1.ª línea +0.00 cm | 1.00 líneas | 0/0 pt |  | «CHRISTIAN ERICK GARCÍA CHÁVEZ» → Arial Narrow 11.0 negrita |
 | 10 | DANIELA ALVARADO ARÉVALO | izquierda | izq 0.00 cm · 1.ª línea +0.00 cm | 1.00 líneas | 0/0 pt |  | «DANIELA ALVARADO ARÉVALO» → Arial Narrow 11.0 negrita |
